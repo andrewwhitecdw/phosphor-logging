@@ -733,7 +733,7 @@ void Manager::checkAndQuiesceHost()
         // The boot block object will still be created and the associations to
         // find the log will be present. Don't want a dependency with
         // phosphor-state-manager service
-        lg2::info("Error reading QuiesceOnHwError property: {ERROR}", "ERROR",
+        lg2::info("Error reading CurrentHostState property: {ERROR}", "ERROR",
                   e);
         return;
     }
