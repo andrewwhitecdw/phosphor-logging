@@ -164,7 +164,7 @@ void Manager::pendingLogDeleteCallback()
     static constexpr size_t batchSize = 50;
     size_t deleted = 0;
 
-    while (this->_pendingPurgeEvents.size() > 0 && deleted < batchSize)
+    while (!this->_pendingPurgeEvents.empty() && deleted < batchSize)
     {
         auto it = this->_pendingPurgeEvents.end() - 1;
         auto pendingDeleteId = *it;
@@ -181,7 +181,7 @@ void Manager::pendingLogDeleteCallback()
         this->_pendingPurgeEvents.erase(it);
         ++deleted;
     }
-    if (this->_pendingPurgeEvents.size() == 0)
+    if (this->_pendingPurgeEvents.empty())
     {
         if (this->entries.empty())
         {
