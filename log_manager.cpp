@@ -1766,14 +1766,12 @@ std::tuple<uint32_t, uint64_t> Manager::getStats(const std::string& nspace)
 
         if (!thisBin->errorEntries.empty())
         {
-            maxErr = *(std::max_element(thisBin->errorEntries.begin(),
-                                        thisBin->errorEntries.end()));
+            maxErr = *(thisBin->errorEntries.rbegin());
         }
 
         if (!thisBin->infoEntries.empty())
         {
-            maxInfo = *(std::max_element(thisBin->infoEntries.begin(),
-                                         thisBin->infoEntries.end()));
+            maxInfo = *(thisBin->infoEntries.rbegin());
         }
 
         uint32_t maxEntry = maxErr > maxInfo ? maxErr : maxInfo;
