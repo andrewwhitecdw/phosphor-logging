@@ -1562,8 +1562,7 @@ phosphor::logging::ManagedObject Manager::getAll(
         // UpdateTimeStamp
         v = iter->second->updateTimestamp();
         prop["UpdateTimestamp"] = v;
-        obj.insert(obj.begin(),
-                   std::make_pair("xyz.openbmc_project.Logging.Entry", prop));
+        obj["xyz.openbmc_project.Logging.Entry"] = prop;
 
         ret_obj[sdbusplus::object_path(std::string(OBJ_ENTRY) + '/' +
                                        std::to_string(iter->second->id()))] =
@@ -1658,9 +1657,7 @@ phosphor::logging::ManagedObject Manager::getAll(
             // UpdateTimeStamp
             v = entryFound->second->updateTimestamp();
             prop["UpdateTimestamp"] = v;
-            obj.insert(obj.begin(),
-                       std::make_pair("xyz.openbmc_project.Logging.Entry",
-                                      prop));
+            obj["xyz.openbmc_project.Logging.Entry"] = prop;
 
             ret_obj[sdbusplus::object_path(
                 std::string(OBJ_ENTRY) + '/' +
@@ -1731,9 +1728,7 @@ phosphor::logging::ManagedObject Manager::getAll(
             v = entryFound->second->updateTimestamp();
             prop["UpdateTimestamp"] = v;
 
-            obj.insert(obj.begin(),
-                       std::make_pair("xyz.openbmc_project.Logging.Entry",
-                                      prop));
+            obj["xyz.openbmc_project.Logging.Entry"] = prop;
 
             ret_obj[sdbusplus::object_path(
                 std::string(OBJ_ENTRY) + '/' +
