@@ -1383,24 +1383,15 @@ bool Manager::deleteAll(
     const std::string& nspace,
     sdbusplus::xyz::openbmc_project::Logging::server::Entry::Level severity)
 {
-    auto binPresent = false;
-    Bin* thisBin;
-    for (auto& pair : binNameMap)
-    {
-        if (pair.first == nspace)
-        {
-            binPresent = true;
-            thisBin = &(pair.second);
-            break;
-        }
-    }
+    auto it = binNameMap.find(nspace);
 
     // If bin is not present then return error
-    if (!binPresent)
+    if (it == binNameMap.end())
     {
         throw sdbusplus::xyz::openbmc_project::Common::Error::
             ResourceNotFound();
     }
+    Bin* thisBin = &(it->second);
 
 #ifdef ENABLE_ERASE_WITH_CALLBACK
     // Info Errors
@@ -1446,23 +1437,14 @@ bool Manager::deleteAll(
 
 bool Manager::deleteAllTypes(const std::string& nspace)
 {
-    auto binPresent = false;
-    Bin* thisBin;
-    for (auto& pair : binNameMap)
-    {
-        if (pair.first == nspace)
-        {
-            binPresent = true;
-            thisBin = &(pair.second);
-            break;
-        }
-    }
+    auto it = binNameMap.find(nspace);
     // If bin is not present then return error
-    if (!binPresent)
+    if (it == binNameMap.end())
     {
         throw sdbusplus::xyz::openbmc_project::Common::Error::
             ResourceNotFound();
     }
+    Bin* thisBin = &(it->second);
 
 #ifdef ENABLE_ERASE_WITH_CALLBACK
     this->_pendingPurgeEvents.insert(this->_pendingPurgeEvents.end(),
